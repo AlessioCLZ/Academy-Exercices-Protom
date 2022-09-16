@@ -27,16 +27,18 @@ public class CicleHandling {
 		
 		
 		//esercizio c
-		int base=1;
+		int count = 15, num1=0, num2=1, sum=1;
 		
-		for(int i=0; i<15; i++)
+		for(int i=1; i<count; ++i)
 		{
-			if(i<1)
-			base=1;
-			else {
-				base= i + (base-1);
-			}
-			System.out.println("Valore "+i+"esimo della serie di Fibonacci: " +base);
+			
+			System.out.println("Valore "+(i-1)+"esimo della serie di Fibonacci: " +sum);
+			
+			sum= num1 + num2;
+			num1=num2;
+			num2=sum;
+			
+			
 			
 		}
 		

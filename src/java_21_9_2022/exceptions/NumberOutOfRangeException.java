@@ -9,17 +9,17 @@ public class NumberOutOfRangeException extends IOException {
 	 */
 	private static final long serialVersionUID = 2658337483261341963L;
 	
-	private String message;
+	private static String message;
 	
 	public NumberOutOfRangeException ()
 	{
-		super();
+		super(message);
 	}
 	
 	public NumberOutOfRangeException(String message)
 	{
 		this();
-		this.message=message;
+		NumberOutOfRangeException.message=message;
 	}
 
 	@Override

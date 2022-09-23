@@ -17,8 +17,7 @@ public class Cart {
 			list.add(good);
 		else
 			{
-			System.out.println("Non è possibile aggiungere ulteriori prodotti");
-			throw new NumberOutOfRangeException();
+			throw new NumberOutOfRangeException("Non è possibile aggiungere ulteriori prodotti");
 			}
 	}
 	

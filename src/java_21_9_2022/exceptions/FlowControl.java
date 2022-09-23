@@ -18,8 +18,7 @@ public class FlowControl {
 				theory= Integer.parseInt(keyboard.nextLine());
 				if(theory<minTheory && theory>maxTheory)
 				{
-					System.out.println("Valore errato, riprovare: è possibile inserire un valore tra -8 e +8.");
-					throw new NumberOutOfRangeException();
+					throw new NumberOutOfRangeException("Valore errato, riprovare: è possibile inserire un valore tra -8 e +8.");
 				}
 					
 			}while(theory<minTheory && theory>maxTheory);
@@ -30,8 +29,7 @@ public class FlowControl {
 				practice= Integer.parseInt(keyboard.nextLine());
 				if(practice<minPractice && practice>maxPractice)
 				{
-					System.out.println("Valore errato, riprovare: è possibile inserire un valore tra 0 e 24.");
-					throw new NumberOutOfRangeException();
+					throw new NumberOutOfRangeException("Valore errato, riprovare: è possibile inserire un valore tra 0 e 24.");
 				}
 			}while(practice<minPractice && practice>maxPractice);
 			

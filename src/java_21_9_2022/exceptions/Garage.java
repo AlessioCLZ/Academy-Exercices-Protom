@@ -40,8 +40,7 @@ public class Garage {
 				}
 				else
 				{
-					System.out.println("Non sono disponibili posti, riprovare più tardi, grazie!");
-					throw new OverArraySizeException();
+					throw new OverArraySizeException("Non sono disponibili posti, riprovare più tardi, grazie!");
 				}
 			}
 		}
@@ -62,8 +61,7 @@ public class Garage {
 			}
 			else
 			{
-				System.out.println("Posto non disponibile, riprovare");
-				throw new OverArraySizeException();
+				throw new OverArraySizeException("Posto non disponibile, riprovare");
 			}
 			
 		}

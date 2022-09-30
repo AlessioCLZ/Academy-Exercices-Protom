@@ -2,7 +2,9 @@ package java16092022.store;
 
 public class Smartphone extends Good {
 
+	@SuppressWarnings("unused")
 	private String os, year;
+	@SuppressWarnings("unused")
 	private int ram;
 	
 	

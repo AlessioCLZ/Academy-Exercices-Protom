@@ -38,6 +38,11 @@ public class Library {
 		{
 			tags.add(tag);
 		}
+		
+		public String toString()
+		{
+			return title + ", by " +author;
+		}
 	}
 	
 	private Map<String, Book> books;

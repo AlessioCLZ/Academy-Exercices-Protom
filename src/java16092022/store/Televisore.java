@@ -2,7 +2,9 @@ package java16092022.store;
 
 public class Televisore extends Good {
 
+	@SuppressWarnings("unused")
 	private double inches;
+	@SuppressWarnings("unused")
 	private boolean isSmart;
 	
 	public Televisore(String brand, String model, int price, double inches, boolean isSmart) {

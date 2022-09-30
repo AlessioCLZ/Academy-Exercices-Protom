@@ -27,8 +27,8 @@ facilmente sostituibili senza compromettere la logica
 
 	 */
 	
-	private final static int EXTRACTEDARRAYSIZE= 4;
-	private final static int INSERTEDARRAYMAXSIZE= 4;
+	private final static int EXTRACTEDARRAYSIZE= 5;
+	private final static int INSERTEDARRAYMAXSIZE= 5;
 	
 	private final static Random r= new Random();
 	
@@ -54,129 +54,124 @@ facilmente sostituibili senza compromettere la logica
 		
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BadInputException {
+		
+		Set<Integer> inputSet= new HashSet<Integer>(), randomSet=new HashSet<Integer>();
+		
+		int inputNum = 0, count = 0;
+		Scanner keyboard = new Scanner(System.in);
+		
+		System.out.println("Benvenuto nel programma della Lotteria!");
 		
 		
-		System.out.println("Benvenuto nel programma della Lotteria");
-		//sezione di inserimento dei dati da tastiera
-
-		try {
-			_insertNumbers();
-		} catch (BadInputException e) {
-			e.printStackTrace();
-		}
-
-		//creazione array con 5 numeri random
 		
-		_createRandomNumbers();
 		
-		//controllo se l'utente ha beccato i numeri
-		
-		_countGoodNumbers();
-		
-		//metodo per assegnare il premio
-		_assignPrize();
-
-	}
-
-	private static void _assignPrize() {
-		
-		int res= _countGoodNumbers();
-		
-		switch(res)
-		{
-			case(1):
-				System.out.println("Congratulazioni, hai indovinato 1 numero, hai vinto il premio: " +Premi.PREMIO1.getTipoPremio());
-			break;
-			case(2):
-				System.out.println("Congratulazioni, hai indovinato 2 numeri, hai vinto il premio: " +Premi.PREMIO2.getTipoPremio());
-			break;
-			case(3):
-				System.out.println("Congratulazioni, hai indovinato 3 numeri, hai vinto il premio: " +Premi.PREMIO3.getTipoPremio());
-			break;
-			case(4):
-				System.out.println("Congratulazioni, hai indovinato 4 numeri, hai vinto il premio: " +Premi.PREMIO4.getTipoPremio());
-			break;
-			case(5):
-				System.out.println("Congratulazioni, hai indovinato 5 numeri, hai vinto il premio: " +Premi.PREMIO5.getTipoPremio());
-			break;
-			default:
-			{
-				System.out.println("Che peccato, non hai indovinato alcun numero. Ritenta, sarai più fortunato. Arrivederci!");
-
-			}
-		}
-	}
-
-	private static int _countGoodNumbers() {
-		
-		Set<Integer> input = null;
-		try {
-			input = _insertNumbers();
-		} catch (BadInputException e) {
-			e.printStackTrace();
-		}
-		Set<Integer> random = _createRandomNumbers();
-		int count=0;
-		
-		for(Integer i: random)
-		{
-			for(Integer n:input)
-			{
-				if(i.equals(n))
-					{
-						count++;
-						break;
-					}
-			}
-		}
-		return count;
-		
-	}
-
-	private static Set<Integer> _createRandomNumbers() {
-		
-		Set<Integer> randomSet = new HashSet<Integer>();
-		
-		do
-		{
-			randomSet.add(r.nextInt(90)+1);
-		}while(randomSet.size()<EXTRACTEDARRAYSIZE);
-		
-		return randomSet;
-	}
-
-	private static Set<Integer> _insertNumbers() throws BadInputException {
-		try (Scanner keyboard = new Scanner(System.in)) {
-			Set<Integer> inputSet = new HashSet<Integer>();
-			
+			//sezione di inserimento dei dati da tastiera
 			do
 			{
-				System.out.println("Inserire numero scelto");
-				Integer inputNum= Integer.parseInt(keyboard.nextLine());
+				System.out.println("Inserire un valore");
+				boolean validValue=false;
 				
-				if(inputNum<1 && inputNum>90)
-				{
-					throw new BadInputException("Il valore da inserire può essere compreso tra 1 e 90");
-				}
-				else
-				{
-					if(inputSet.contains(inputNum))
-						System.out.println("Numero già scelto, riprovare");
+				do {
+					try 
+					{
+						inputNum=Integer.parseInt(keyboard.nextLine());
+						validValue=true;
+					
+					} 
+					catch (BadInputException e) 
+					{
+						System.out.println("Inserire un valore numerico");
+						validValue=false;
+					} 
+					catch (NumberFormatException e) 
+					{
+						System.out.println("Inserire un valore numerico");
+						validValue=false;
+					}
+					if(inputNum>0 && inputNum<=90)
+					{
 						inputSet.add(inputNum);
-				}
+						validValue=true;
+					}
+					else
+					{
+						System.out.println("Valore non compreso tra 1 e 90");
+						validValue=false;
+					}
+					
+				}while(!validValue);
 				
-						
+					if(inputNum>0 && inputNum<=90)
+					{
+						inputSet.add(inputNum);
+					}
+					else
+					{
+						throw new BadInputException("Valore non compreso tra 1 e 90");
+					}
 			}while(inputSet.size()<INSERTEDARRAYMAXSIZE);
 			
-			System.out.println("I numeri scelti sono:" + inputSet);
-			keyboard.close();
-			return inputSet;
-		} catch (BadInputException e) {
-			e.printStackTrace();
-		}
-		return null;
-		
+			System.out.println("I numeri inseriti sono: " +inputSet);
+			
+			//creazione del set con numeri random
+			for(int i=0; i<EXTRACTEDARRAYSIZE; i++)
+			{
+				int randomNum = r.nextInt(90)+1;
+				randomSet.add(randomNum);
+			}
+			
+			System.out.println("I numeri estratti sono: " + randomSet);
+			
+			//conta dei valori simili tra i due set
+			for(Integer i:randomSet)
+			{
+				for(Integer n: inputSet)
+				{
+					if(n.equals(i))
+						count++;		
+				}
+			}
+			
+			System.out.println("I numeri indovinati sono:" +count);
+			
+			switch(count)
+			{
+				case 1:
+				{
+					System.out.println("Congratulazioni! Ha indovinato " +count+ " numeri. Il suo premio è: "+ Premi.PREMIO1.getTipoPremio());
+				}
+				break;
+				case 2:
+				{
+					System.out.println("Congratulazioni! Ha indovinato " +count+ " numeri. Il suo premio è: "+ Premi.PREMIO2.getTipoPremio());
+				}
+				break;
+				case 3:
+				{
+					System.out.println("Congratulazioni! Ha indovinato " +count+ " numeri. Il suo premio è: "+ Premi.PREMIO3.getTipoPremio());
+				}
+				break;
+				case 4:
+				{
+					System.out.println("Congratulazioni! Ha indovinato " +count+ " numeri. Il suo premio è: "+ Premi.PREMIO4.getTipoPremio());
+				}
+				break;
+				case 5:
+				{
+					System.out.println("Congratulazioni! Ha indovinato " +count+ " numeri. Il suo premio è: "+ Premi.PREMIO5.getTipoPremio());
+				}
+				break;
+				default:
+					System.out.println("Peccato, ha perso. Sarà più fortunato la prossima volta!");
+			}
+			
+		keyboard.close();
 	}
 
 }
+	
+	
+		
+		
+		

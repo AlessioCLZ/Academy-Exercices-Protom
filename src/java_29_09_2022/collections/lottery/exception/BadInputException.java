@@ -2,7 +2,7 @@ package java_29_09_2022.collections.lottery.exception;
 
 
 
-public class BadInputException extends Exception {
+public class BadInputException extends NumberFormatException {
 
 
 	/**

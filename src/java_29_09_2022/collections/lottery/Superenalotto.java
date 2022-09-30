@@ -33,11 +33,25 @@ facilmente sostituibili senza compromettere la logica
 	private final static Random r= new Random();
 	
 	private static enum Premi{
-		PREMIO1,
-		PREMIO2,
-		PREMIO3,
-		PREMIO4,
-		PREMIO5;
+		PREMIO1("Premio1"),
+		PREMIO2("Premio2"),
+		PREMIO3("Premio3"),
+		PREMIO4("Premio4"),
+		PREMIO5("Premio5");
+		
+		String tipoPremio;
+		Premi(String tipoPremio)
+		{
+			this.tipoPremio=tipoPremio;
+		}
+		public String getTipoPremio() {
+			return tipoPremio;
+		}
+		@SuppressWarnings("unused")
+		public void setTipoPremio(String tipoPremio) {
+			this.tipoPremio = tipoPremio;
+		}
+		
 	}
 	
 	public static void main(String[] args) {
@@ -72,19 +86,19 @@ facilmente sostituibili senza compromettere la logica
 		switch(res)
 		{
 			case(1):
-				System.out.println("Congratulazioni, hai indovinato 1 numero, hai vinto il premio: " +Premi.PREMIO1);
+				System.out.println("Congratulazioni, hai indovinato 1 numero, hai vinto il premio: " +Premi.PREMIO1.getTipoPremio());
 			break;
 			case(2):
-				System.out.println("Congratulazioni, hai indovinato 2 numeri, hai vinto il premio: " +Premi.PREMIO2);
+				System.out.println("Congratulazioni, hai indovinato 2 numeri, hai vinto il premio: " +Premi.PREMIO2.getTipoPremio());
 			break;
 			case(3):
-				System.out.println("Congratulazioni, hai indovinato 3 numeri, hai vinto il premio: " +Premi.PREMIO3);
+				System.out.println("Congratulazioni, hai indovinato 3 numeri, hai vinto il premio: " +Premi.PREMIO3.getTipoPremio());
 			break;
 			case(4):
-				System.out.println("Congratulazioni, hai indovinato 4 numeri, hai vinto il premio: " +Premi.PREMIO4);
+				System.out.println("Congratulazioni, hai indovinato 4 numeri, hai vinto il premio: " +Premi.PREMIO4.getTipoPremio());
 			break;
 			case(5):
-				System.out.println("Congratulazioni, hai indovinato 5 numeri, hai vinto il premio: " +Premi.PREMIO5);
+				System.out.println("Congratulazioni, hai indovinato 5 numeri, hai vinto il premio: " +Premi.PREMIO5.getTipoPremio());
 			break;
 			default:
 			{
